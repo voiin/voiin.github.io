@@ -3,8 +3,7 @@
   <entry>
     <title>宝塔5.9专业版一键源码破解</title>
     <url>/2019/12/05/bt5.9pj/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>宝塔面板是近几年兴起的，对于想建站的新手小白比较友好，把linux上复杂的配置命令用面板可视化进行管理<br>实现傻瓜式建站；</p>
-<p>本教程是基于宝塔5.9实现，内有一键脚本和命令安装可根据自己需求酌情选择 这是该项目<a href="https://github.com/voiin/bt-panel" target="_blank" rel="noopener">github地址</a>；</p>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>-宝塔面板是近几年兴起的，对于想建站的新手小白比较友好，把linux上复杂的配置命令用面板可视化进行管理,实现傻瓜式建站；<br>-本教程是基于宝塔5.9实现，内有一键脚本和命令安装可根据自己需求酌情选择 这是该项目<a href="https://github.com/voiin/bt-panel" target="_blank" rel="noopener">github地址</a>；</p>
 <a id="more"></a>
 <h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><ol>
 <li>熟悉linux操作系统基本命令，不会的直接复制代码即可；</li>
@@ -43,40 +42,55 @@
       </tags>
   </entry>
   <entry>
-    <title>Nginx反向代理</title>
-    <url>/2019/12/16/nginxfd/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>nginx是一个作用于linux系统上的高性能web服务器，他的特点是轻量级，占有内存少，并发能力强。</p>
-<p>能够使用更少的资源，支持更多的并发连接，体现更高的效率。还有他的反向代理功能也是十分强大实用，</p>
-<p>本贴主要内容也是围绕其反向代理实现用域名访问百度，谷歌，邮箱以此类推。</p>
+    <title>Windows+Ubuntu双系统教程</title>
+    <url>/2020/03/14/wu/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Ubuntu是以桌面应用为主的Linux操作系统，相较于其他Linux系统，Ubuntu的界面应用的使用与可视化非常友好，是用做桌面客户端系统的不二之选，而且现版本自带nvidia驱动，兼容性有了很大改善，对于爱好linux的朋友来说，可以说是工作娱乐两不误，自己也是先后折腾了几次踩了一些坑才满足自己要求，在此将整个安装过程记录下来，希望对大家有所帮助。</p>
 <a id="more"></a>
-<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><hr>
-<h3 id="反向"><a href="#反向" class="headerlink" title="反向"></a>反向</h3><p>反向代理，也就是负载均衡，就是代理服务器把访问internet上的内容先返回给目标服务器，再把发送给目标服务器上的内容返回给客户端。举例如某宝网站，每天同时连接到网站的访问人数已经爆表，单个服务器远远不能满足人民日益增长的购买欲望了，此时就出现了分布式部署；也就是通过部署多台服务器来解决访问人数限制的问题；某宝网站中大部分功能也是直接使用Nginx进行反向代理实现的。</p>
-<p><strong><font color=green>反向代理的特点就是可以减缓代理服务器的负载 过程中反向代理服务器和目标服务器对外就是一个服务器，暴露的是代理服务器地址，隐藏了真实服务器IP地址。</font></strong><br><img src="https://img.voiin.com/images/2020/03/26/1.jpg" alt="1"></p>
-<p><strong>简而言之一句话：正向代理代理客户端，反向代理代理服务器</strong></p>
-<h2 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h2><ol>
-<li>一台部署了Nginx服务的服务器；</li>
-<li>一个解析到服务器的域名；</li>
-<li>条件允许可以去域名供应商那申请个免费ssl证书；</li>
+
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="硬盘分区"><a href="#硬盘分区" class="headerlink" title="硬盘分区"></a>硬盘分区</h3><p>windows下按<code>win+x</code>进入磁盘管理，选择一块容量大的盘右键压缩卷，压缩一个空间为100G的卷（足够用了）压缩完退出，不用新建简单卷。</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu1.jpg" alt="1"></p>
+<h3 id="将镜像写入U盘"><a href="#将镜像写入U盘" class="headerlink" title="将镜像写入U盘"></a>将镜像写入U盘</h3><ol>
+<li>去Ubuntu中文网<a href="https://cn.ubuntu.com/download" target="_blank" rel="noopener">https://cn.ubuntu.com/download</a> 下载最新Ubuntu镜像版本到本地；</li>
+<li>下载并安装软碟通<a href="https://www.ultraiso.com/download.html" target="_blank" rel="noopener">官网下载地址</a>，插上U盘，有重要数据的建议备份好，因为之后需要格式化；</li>
+<li>打开软碟通，进入刚才下载镜像的目录点击iso镜像文件，写入硬盘映像；</li>
 </ol>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="查看Nginx信息"><a href="#查看Nginx信息" class="headerlink" title="查看Nginx信息"></a>查看Nginx信息</h3><p>输入下面的命令查看Nginx的配置信息。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ nginx -V</span><br></pre></td></tr></table></figure>
-<p><img src="https://img.voiin.com/images/2020/03/26/2deef58bb31431fb9.png" alt="2"><br>第一个为nginx安装的目录，第二个为Nginx的二进制文件，第三个为nginx的主配置文件目录，可以看到我是默认软件包安装，也就是使用CentOS软件包<code>sudo yum -y install nginx</code>。</p>
-<p>如果是你的nginx是上述的配置信息，那么Nginx的虚拟主机配置文件在<code>/etc/nginx/conf.d</code>文件夹中，第一次配置建议把默认的配置文件<code>default.conf</code>删除，以免发生冲突。如果要开启某一个虚拟主机，则在该文件夹下增添配置文件或者建立一个软连接到<code>/etc/nginx/conf.d/</code>文件夹并重启Nginx即可</p>
-<h3 id="Nginx配置"><a href="#Nginx配置" class="headerlink" title="Nginx配置"></a>Nginx配置</h3><p>在<code>/etc/nginx/conf.d</code>目录下新建一个名字为你用做反向代理的域名的文件，当然名称随意，只是为了方便记忆。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo vim /etc/nginx/conf.d/&lt;tdom.ml&gt;</span><br></pre></td></tr></table></figure>
-<p><code>&lt;tdom.ml&gt;</code>换成自己的域名，接着输入下面代码，完成保存退出</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name &lt;tdom.ml&gt;;</span><br><span class="line">    </span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass https://www.baidu.com/;</span><br><span class="line">        proxy_set_header        Host                 ;</span><br><span class="line">        proxy_set_header        X-Real-IP            <span class="variable">$remote_addr</span>;</span><br><span class="line">        proxy_set_header        X-Forwarded-For      <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        proxy_set_header        X-Remote-Port        <span class="variable">$remote_port</span>;</span><br><span class="line">        proxy_set_header        X-Forwarded-Proto    <span class="variable">$scheme</span>;</span><br><span class="line">        proxy_redirect          off;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu2.jpg" alt="2"></p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu3.jpg" alt="3"></p>
+<p><strong>注意硬盘驱动器那栏是否为自己U盘的盘符，检查无误默认写入就好了</strong></p>
+<h2 id="Bios设置"><a href="#Bios设置" class="headerlink" title="Bios设置"></a>Bios设置</h2><h3 id="判断Bios类型"><a href="#判断Bios类型" class="headerlink" title="判断Bios类型"></a><font id="a">判断Bios类型</font></h3><p>回到主界面<code>win+r</code>输入<code>msinfo32</code>回车，注意看Bios模式是否是UEFI，只要不是很老旧的本本，基本都是UEFI 如果显示传统 则是MBR启动，后面Ubuntu系统分区时要谈到</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu4.jpg" alt="4"></p>
+<h3 id="关闭Securt-Boot选项"><a href="#关闭Securt-Boot选项" class="headerlink" title="关闭Securt Boot选项"></a>关闭Securt Boot选项</h3><p>电脑关机，按下电源键按下自己品牌电脑的Bios热键一般（F2）进入Bios界面，不清楚的百度下，把<code>Securt Boot</code>选项设置为<code>disable</code>按F10保存退出，不设置系统可能安装失败。</p>
+<h2 id="U盘安装系统"><a href="#U盘安装系统" class="headerlink" title="U盘安装系统"></a>U盘安装系统</h2><p>按下U盘启动热键进入菜单项，选择U盘启动进入Ubuntu安装界面 在Install Ubuntu选项按’e’键进入编辑模式，清空<code>quite splash</code>后内容，其后输入<code>nomodeset</code> F10启动。</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu5.jpg" alt="5"></p>
+<p><strong>第三个勾 勾选会自动集成安装nvidia驱动等，建议勾选</strong></p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu6.jpg" alt="6"></p>
+<p><strong>这里选择其他选项手动进行分区</strong> </p>
+<h3 id="Ubuntu系统分区"><a href="#Ubuntu系统分区" class="headerlink" title="Ubuntu系统分区"></a>Ubuntu系统分区</h3><p>以下内容是在虚拟机内操作，可能图片信息显示有差异，但配置信息选项是按照真实物理机要求来的</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu7.jpg" alt="7"></p>
+<p><strong>选择你之前添加的那块容量100G的盘，右键添加</strong></p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu8.jpg" alt="8"></p>
+<p>大小选择200MB，分区类型为逻辑分区，空间起始位置，这就是实现你双系统的原因了。这就是启动Ubuntu的目录，里面存放着Ubuntu开机引导文件，一般只有几十兆，建议划分200兆，<strong>这里注意</strong>：</p>
 <ul>
-<li><code>&lt;tdom.ml&gt;</code>还是自己的域名；</li>
-<li><code>proxy_pass</code>后即为你要反向代理的网站；</li>
+<li>如果是UEFI启动的挂载点选择EFI系统分区</li>
+<li>如果是传统MBR启动挂载点选择<code>/boot</code></li>
 </ul>
-<h3 id="建立软链接"><a href="#建立软链接" class="headerlink" title="建立软链接"></a>建立软链接</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ln -s &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;&lt;tdom.ml&gt; &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;</span><br></pre></td></tr></table></figure>
-<p>也就是新建文件快捷方式到<code>/etc/nginx/conf.d/</code></p>
-<h3 id="Nginx重启"><a href="#Nginx重启" class="headerlink" title="Nginx重启"></a>Nginx重启</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ systemctl restart nginx</span><br><span class="line">$ systemctl status nginx</span><br></pre></td></tr></table></figure>
-<p>完成后打开浏览器输入你的域名<br><img src="https://img.voiin.com/images/2020/03/26/3594ca03ac9fa6d03.png" alt="3"></p>
+<p>判断标准在前面的<font color=black><a href="#a">判断Bios类型</a></font>里，</p>
+<p><strong>剩余分区信息如下</strong></p>
+<ul>
+<li><p>swap 这个是Linux的交换区目录，主要用于电脑内存不足时，系统会调用这块分区来运行程序，以免出现异常，大小为你本机运行内存容量即可，逻辑分区，空间起始位置，挂载点选择<strong>交换空间；</strong></p>
+</li>
+<li><p>/ 这是Linux的根目录，相当于windows的C盘，但是软件程序和依赖都是默认安装在这个位置，所以这个大小我分的70G，分区类型为<strong>主分区</strong>，空间起始位置，挂载点 <code>/</code>；</p>
+</li>
+<li><p>/home 这个是Linux的家目录，相当于windos的D盘，剩余空间大小分配给它，逻辑分区，空间起始位置，挂载点<code>/home</code>；</p>
+</li>
+</ul>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu9.jpg" alt="9"></p>
+<p>这一步要选对，之前不是设置了个200MB的系统引导分区嘛 ，下面安装启动引导器的设备一定要对应上面引导分区的编号，随即点击安装。</p>
+<p>后面的步骤就是设置时区和用户名密码这些比较简单的环节，书写不易，我就不一一解释了。</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu10.jpg" alt="10"></p>
 ]]></content>
       <categories>
-        <category>Nginx</category>
+        <category>Linux</category>
       </categories>
   </entry>
   <entry>
@@ -135,55 +149,40 @@
       </categories>
   </entry>
   <entry>
-    <title>Windows+Ubuntu双系统教程</title>
-    <url>/2020/03/14/wu/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Ubuntu是以桌面应用为主的Linux操作系统，相较于其他Linux系统，Ubuntu的界面应用的使用与可视化非常友好，是用做桌面客户端系统的不二之选，而且现版本自带nvidia驱动，兼容性有了很大改善，对于爱好linux的朋友来说，可以说是工作娱乐两不误，自己也是先后折腾了几次踩了一些坑才满足自己要求，在此将整个安装过程记录下来，希望对大家有所帮助。</p>
+    <title>Nginx反向代理</title>
+    <url>/2019/12/16/nginxfd/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>nginx是一个作用于linux系统上的高性能web服务器，他的特点是轻量级，占有内存少，并发能力强。</p>
+<p>能够使用更少的资源，支持更多的并发连接，体现更高的效率。还有他的反向代理功能也是十分强大实用，</p>
+<p>本贴主要内容也是围绕其反向代理实现用域名访问百度，谷歌，邮箱以此类推。</p>
 <a id="more"></a>
-
-<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="硬盘分区"><a href="#硬盘分区" class="headerlink" title="硬盘分区"></a>硬盘分区</h3><p>windows下按<code>win+x</code>进入磁盘管理，选择一块容量大的盘右键压缩卷，压缩一个空间为100G的卷（足够用了）压缩完退出，不用新建简单卷。</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu1.jpg" alt="1"></p>
-<h3 id="将镜像写入U盘"><a href="#将镜像写入U盘" class="headerlink" title="将镜像写入U盘"></a>将镜像写入U盘</h3><ol>
-<li>去Ubuntu中文网<a href="https://cn.ubuntu.com/download" target="_blank" rel="noopener">https://cn.ubuntu.com/download</a> 下载最新Ubuntu镜像版本到本地；</li>
-<li>下载并安装软碟通<a href="https://www.ultraiso.com/download.html" target="_blank" rel="noopener">官网下载地址</a>，插上U盘，有重要数据的建议备份好，因为之后需要格式化；</li>
-<li>打开软碟通，进入刚才下载镜像的目录点击iso镜像文件，写入硬盘映像；</li>
+<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><hr>
+<h3 id="反向"><a href="#反向" class="headerlink" title="反向"></a>反向</h3><p>反向代理，也就是负载均衡，就是代理服务器把访问internet上的内容先返回给目标服务器，再把发送给目标服务器上的内容返回给客户端。举例如某宝网站，每天同时连接到网站的访问人数已经爆表，单个服务器远远不能满足人民日益增长的购买欲望了，此时就出现了分布式部署；也就是通过部署多台服务器来解决访问人数限制的问题；某宝网站中大部分功能也是直接使用Nginx进行反向代理实现的。</p>
+<p><strong><font color=green>反向代理的特点就是可以减缓代理服务器的负载 过程中反向代理服务器和目标服务器对外就是一个服务器，暴露的是代理服务器地址，隐藏了真实服务器IP地址。</font></strong><br><img src="https://img.voiin.com/images/2020/03/26/1.jpg" alt="1"></p>
+<p><strong>简而言之一句话：正向代理代理客户端，反向代理代理服务器</strong></p>
+<h2 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h2><ol>
+<li>一台部署了Nginx服务的服务器；</li>
+<li>一个解析到服务器的域名；</li>
+<li>条件允许可以去域名供应商那申请个免费ssl证书；</li>
 </ol>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu2.jpg" alt="2"></p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu3.jpg" alt="3"></p>
-<p><strong>注意硬盘驱动器那栏是否为自己U盘的盘符，检查无误默认写入就好了</strong></p>
-<h2 id="Bios设置"><a href="#Bios设置" class="headerlink" title="Bios设置"></a>Bios设置</h2><h3 id="判断Bios类型"><a href="#判断Bios类型" class="headerlink" title="判断Bios类型"></a><font id="a">判断Bios类型</font></h3><p>回到主界面<code>win+r</code>输入<code>msinfo32</code>回车，注意看Bios模式是否是UEFI，只要不是很老旧的本本，基本都是UEFI 如果显示传统 则是MBR启动，后面Ubuntu系统分区时要谈到</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu4.jpg" alt="4"></p>
-<h3 id="关闭Securt-Boot选项"><a href="#关闭Securt-Boot选项" class="headerlink" title="关闭Securt Boot选项"></a>关闭Securt Boot选项</h3><p>电脑关机，按下电源键按下自己品牌电脑的Bios热键一般（F2）进入Bios界面，不清楚的百度下，把<code>Securt Boot</code>选项设置为<code>disable</code>按F10保存退出，不设置系统可能安装失败。</p>
-<h2 id="U盘安装系统"><a href="#U盘安装系统" class="headerlink" title="U盘安装系统"></a>U盘安装系统</h2><p>按下U盘启动热键进入菜单项，选择U盘启动进入Ubuntu安装界面 在Install Ubuntu选项按’e’键进入编辑模式，清空<code>quite splash</code>后内容，其后输入<code>nomodeset</code> F10启动。</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu5.jpg" alt="5"></p>
-<p><strong>第三个勾 勾选会自动集成安装nvidia驱动等，建议勾选</strong></p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu6.jpg" alt="6"></p>
-<p><strong>这里选择其他选项手动进行分区</strong> </p>
-<h3 id="Ubuntu系统分区"><a href="#Ubuntu系统分区" class="headerlink" title="Ubuntu系统分区"></a>Ubuntu系统分区</h3><p>以下内容是在虚拟机内操作，可能图片信息显示有差异，但配置信息选项是按照真实物理机要求来的</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu7.jpg" alt="7"></p>
-<p><strong>选择你之前添加的那块容量100G的盘，右键添加</strong></p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu8.jpg" alt="8"></p>
-<p>大小选择200MB，分区类型为逻辑分区，空间起始位置，这就是实现你双系统的原因了。这就是启动Ubuntu的目录，里面存放着Ubuntu开机引导文件，一般只有几十兆，建议划分200兆，<strong>这里注意</strong>：</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="查看Nginx信息"><a href="#查看Nginx信息" class="headerlink" title="查看Nginx信息"></a>查看Nginx信息</h3><p>输入下面的命令查看Nginx的配置信息。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ nginx -V</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.voiin.com/images/2020/03/26/2deef58bb31431fb9.png" alt="2"><br>第一个为nginx安装的目录，第二个为Nginx的二进制文件，第三个为nginx的主配置文件目录，可以看到我是默认软件包安装，也就是使用CentOS软件包<code>sudo yum -y install nginx</code>。</p>
+<p>如果是你的nginx是上述的配置信息，那么Nginx的虚拟主机配置文件在<code>/etc/nginx/conf.d</code>文件夹中，第一次配置建议把默认的配置文件<code>default.conf</code>删除，以免发生冲突。如果要开启某一个虚拟主机，则在该文件夹下增添配置文件或者建立一个软连接到<code>/etc/nginx/conf.d/</code>文件夹并重启Nginx即可</p>
+<h3 id="Nginx配置"><a href="#Nginx配置" class="headerlink" title="Nginx配置"></a>Nginx配置</h3><p>在<code>/etc/nginx/conf.d</code>目录下新建一个名字为你用做反向代理的域名的文件，当然名称随意，只是为了方便记忆。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo vim /etc/nginx/conf.d/&lt;tdom.ml&gt;</span><br></pre></td></tr></table></figure>
+<p><code>&lt;tdom.ml&gt;</code>换成自己的域名，接着输入下面代码，完成保存退出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name &lt;tdom.ml&gt;;</span><br><span class="line">    </span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass https://www.baidu.com/;</span><br><span class="line">        proxy_set_header        Host                 ;</span><br><span class="line">        proxy_set_header        X-Real-IP            <span class="variable">$remote_addr</span>;</span><br><span class="line">        proxy_set_header        X-Forwarded-For      <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        proxy_set_header        X-Remote-Port        <span class="variable">$remote_port</span>;</span><br><span class="line">        proxy_set_header        X-Forwarded-Proto    <span class="variable">$scheme</span>;</span><br><span class="line">        proxy_redirect          off;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>如果是UEFI启动的挂载点选择EFI系统分区</li>
-<li>如果是传统MBR启动挂载点选择<code>/boot</code></li>
+<li><code>&lt;tdom.ml&gt;</code>还是自己的域名；</li>
+<li><code>proxy_pass</code>后即为你要反向代理的网站；</li>
 </ul>
-<p>判断标准在前面的<font color=black><a href="#a">判断Bios类型</a></font>里，</p>
-<p><strong>剩余分区信息如下</strong></p>
-<ul>
-<li><p>swap 这个是Linux的交换区目录，主要用于电脑内存不足时，系统会调用这块分区来运行程序，以免出现异常，大小为你本机运行内存容量即可，逻辑分区，空间起始位置，挂载点选择<strong>交换空间；</strong></p>
-</li>
-<li><p>/ 这是Linux的根目录，相当于windows的C盘，但是软件程序和依赖都是默认安装在这个位置，所以这个大小我分的70G，分区类型为<strong>主分区</strong>，空间起始位置，挂载点 <code>/</code>；</p>
-</li>
-<li><p>/home 这个是Linux的家目录，相当于windos的D盘，剩余空间大小分配给它，逻辑分区，空间起始位置，挂载点<code>/home</code>；</p>
-</li>
-</ul>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu9.jpg" alt="9"></p>
-<p>这一步要选对，之前不是设置了个200MB的系统引导分区嘛 ，下面安装启动引导器的设备一定要对应上面引导分区的编号，随即点击安装。</p>
-<p>后面的步骤就是设置时区和用户名密码这些比较简单的环节，书写不易，我就不一一解释了。</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu10.jpg" alt="10"></p>
+<h3 id="建立软链接"><a href="#建立软链接" class="headerlink" title="建立软链接"></a>建立软链接</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ln -s &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;&lt;tdom.ml&gt; &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;</span><br></pre></td></tr></table></figure>
+<p>也就是新建文件快捷方式到<code>/etc/nginx/conf.d/</code></p>
+<h3 id="Nginx重启"><a href="#Nginx重启" class="headerlink" title="Nginx重启"></a>Nginx重启</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ systemctl restart nginx</span><br><span class="line">$ systemctl status nginx</span><br></pre></td></tr></table></figure>
+<p>完成后打开浏览器输入你的域名<br><img src="https://img.voiin.com/images/2020/03/26/3594ca03ac9fa6d03.png" alt="3"></p>
 ]]></content>
       <categories>
-        <category>Linux</category>
+        <category>Nginx</category>
       </categories>
   </entry>
 </search>
