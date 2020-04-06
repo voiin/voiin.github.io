@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>宝塔5.9专业版一键源码破解</title>
+    <url>/2019/12/05/bt5.9pj/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>宝塔面板是近几年兴起的，对于想建站的新手小白比较友好，把linux上复杂的配置命令用面板可视化进行管理<br>实现傻瓜式建站；</p>
+<p>本教程是基于宝塔5.9实现，内有一键脚本和命令安装可根据自己需求酌情选择 这是该项目<a href="https://github.com/voiin/bt-panel" target="_blank" rel="noopener">github地址</a>；</p>
+<a id="more"></a>
+<h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><ol>
+<li>熟悉linux操作系统基本命令，不会的直接复制代码即可；</li>
+<li>确保是干净的系统环境，没有安装任何lnmp环境之类的；</li>
+<li>系统要求 centos&gt;=7&amp;&amp;ubuntu&gt;=16.04&amp;&amp;debian&gt;=9;</li>
+</ol>
+<h2 id="一键脚本"><a href="#一键脚本" class="headerlink" title="一键脚本"></a>一键脚本</h2><p><strong>使用一键脚本</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ wget -N --no-check-certificate <span class="string">"https://raw.githubusercontent.com/voiin/bt-panel/master/crack.sh"</span> &amp;&amp; bash crack.sh</span><br></pre></td></tr></table></figure>
+<p>该脚本一键安装宝塔5.9并升至专业版随即破解，可谓一步到味！<br><img src="https://img.voiin.com/images/2020/03/17/6e82043a8134848bf.png" alt="6"></p>
+<p>放弃使用脚本请直接阅读正文部分！！！</p>
+<h3 id="脚本声明"><a href="#脚本声明" class="headerlink" title="脚本声明"></a>脚本声明</h3><ol>
+<li>本脚本为本人亲自开发，并在各大Linux操作系统上测试多次均成功；</li>
+<li>由于脚本在国外的服务器上，开始执行时可能网络不通被拒，可过几秒再复制执行一次；</li>
+</ol>
+<p>当然你喜欢折腾的话那么一下内容可能更适合你。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h3><p>打开<a href="https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=1186&extra=page%3D1%26filter%3Dtypeid%26typeid%3D6" target="_blank" rel="noopener">宝塔5.9地址</a><br><img src="https://img.voiin.com/images/2020/03/17/1ae8940bef9f026a8.png" alt="1"><br>根据自己的系统环境复制命令到shell上 敲回车执行。<br><img src="https://img.voiin.com/images/2020/03/17/27da9299353a382ff.png" alt="2"><br>执行完毕后根据下面提示复制面板地址在浏览器中打开，再复制账号，密码完成登录，宝塔面板的默认端口是8888 如果浏览器打不开，则是没有放行端口，去你服务器主机商下安全组或者防火墙开启8888端口。<br><img src="https://img.voiin.com/images/2020/03/17/30c8ac091b15e32dc.png" alt="3"><br>到这一步，基本的环境就构建好了，接着去面板设置里面把默认的账号，密码改了。下面开始步入正题<br><img src="https://img.voiin.com/images/2020/03/17/40021e2a393842f5c.png" alt="4"></p>
+<h3 id="免费版升级专业版"><a href="#免费版升级专业版" class="headerlink" title="免费版升级专业版"></a>免费版升级专业版</h3><p>注意的是如果你之前有在使用 5.9 的免费版本，通过此脚本升级专业版 复制代码回车执行。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ wget -O update.sh http://download.bt.cn/install/update_pro.sh &amp;&amp; bash update.sh pro</span><br></pre></td></tr></table></figure>
+<h3 id="破解"><a href="#破解" class="headerlink" title="破解"></a>破解</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /www/server/panel/class</span><br><span class="line">$ vim common.py</span><br></pre></td></tr></table></figure>
+<p>执行后你会看到下面情景<br><img src="https://img.voiin.com/images/2020/03/17/54fd54b9d515a7abb.png" alt="5"><br>我们需要找到 163 行代码，但是用编辑器慢慢的找到 164 行太麻烦，直接键盘输入163就会自动跳到163行代码。</p>
+<p>找到 data = panelAuth.panelAuth ().get_order_status (None); 键盘输入i进入编辑模式并且在前面放上 #进行注释。</p>
+<p>接着输入下面的代码。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ data = &#123;<span class="string">'status'</span> : True,<span class="string">'msg'</span> : &#123;<span class="string">'endtime'</span> : 32503651199&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>完成之后按esc键 输入:wq（就是shift键+;键）进入末行模式 输入wq保存退出。</p>
+<p>最后也是最重要的一步，创建一名为userInfo.json空白文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /www/server/panel/data</span><br><span class="line">$ vim userInfo.json</span><br><span class="line">按下esc 输入:wq 回车</span><br></pre></td></tr></table></figure>
+<h3 id="接着重启面板"><a href="#接着重启面板" class="headerlink" title="接着重启面板"></a>接着重启面板</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /etc/init.d/bt restart</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.voiin.com/images/2020/03/17/739784e71bef5be7f.png" alt="7"><br>到此 面板就破解完成，清除浏览器缓存重新打开你的面板。</p>
+<p>制作不易，中途有什么问题给我留言，有时间我都会看的。</p>
+]]></content>
+      <categories>
+        <category>宝塔</category>
+      </categories>
+      <tags>
+        <tag>bt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/04/05/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+</search>
