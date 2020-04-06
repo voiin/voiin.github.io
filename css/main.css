@@ -1263,7 +1263,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #6fd738;
+  background: #73936a;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1660,7 +1660,6 @@ pre .javascript .function {
 }
 @media (max-width: 991px) {
   .back-to-top {
-    left: 20px;
     opacity: 0.8;
   }
 }
