@@ -44,7 +44,7 @@
   </entry>
   <entry>
     <title>Nginx反向代理</title>
-    <url>/2029/12/16/nginxfd/</url>
+    <url>/2019/12/16/nginxfd/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>nginx是一个作用于linux系统上的高性能web服务器，他的特点是轻量级，占有内存少，并发能力强。</p>
 <p>能够使用更少的资源，支持更多的并发连接，体现更高的效率。还有他的反向代理功能也是十分强大实用，</p>
 <p>本贴主要内容也是围绕其反向代理实现用域名访问百度，谷歌，邮箱以此类推。</p>
