@@ -43,22 +43,147 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2020/04/06/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+    <title>Nginx反向代理</title>
+    <url>/2029/12/16/nginxfd/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>nginx是一个作用于linux系统上的高性能web服务器，他的特点是轻量级，占有内存少，并发能力强。</p>
+<p>能够使用更少的资源，支持更多的并发连接，体现更高的效率。还有他的反向代理功能也是十分强大实用，</p>
+<p>本贴主要内容也是围绕其反向代理实现用域名访问百度，谷歌，邮箱以此类推。</p>
 <a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><hr>
+<h3 id="反向"><a href="#反向" class="headerlink" title="反向"></a>反向</h3><p>反向代理，也就是负载均衡，就是代理服务器把访问internet上的内容先返回给目标服务器，再把发送给目标服务器上的内容返回给客户端。举例如某宝网站，每天同时连接到网站的访问人数已经爆表，单个服务器远远不能满足人民日益增长的购买欲望了，此时就出现了分布式部署；也就是通过部署多台服务器来解决访问人数限制的问题；某宝网站中大部分功能也是直接使用Nginx进行反向代理实现的。</p>
+<p><strong><font color=green>反向代理的特点就是可以减缓代理服务器的负载 过程中反向代理服务器和目标服务器对外就是一个服务器，暴露的是代理服务器地址，隐藏了真实服务器IP地址。</font></strong><br><img src="https://img.voiin.com/images/2020/03/26/1.jpg" alt="1"></p>
+<p><strong>简而言之一句话：正向代理代理客户端，反向代理代理服务器</strong></p>
+<h2 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h2><ol>
+<li>一台部署了Nginx服务的服务器；</li>
+<li>一个解析到服务器的域名；</li>
+<li>条件允许可以去域名供应商那申请个免费ssl证书；</li>
+</ol>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="查看Nginx信息"><a href="#查看Nginx信息" class="headerlink" title="查看Nginx信息"></a>查看Nginx信息</h3><p>输入下面的命令查看Nginx的配置信息。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ nginx -V</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.voiin.com/images/2020/03/26/2deef58bb31431fb9.png" alt="2"><br>第一个为nginx安装的目录，第二个为Nginx的二进制文件，第三个为nginx的主配置文件目录，可以看到我是默认软件包安装，也就是使用CentOS软件包<code>sudo yum -y install nginx</code>。</p>
+<p>如果是你的nginx是上述的配置信息，那么Nginx的虚拟主机配置文件在<code>/etc/nginx/conf.d</code>文件夹中，第一次配置建议把默认的配置文件<code>default.conf</code>删除，以免发生冲突。如果要开启某一个虚拟主机，则在该文件夹下增添配置文件或者建立一个软连接到<code>/etc/nginx/conf.d/</code>文件夹并重启Nginx即可</p>
+<h3 id="Nginx配置"><a href="#Nginx配置" class="headerlink" title="Nginx配置"></a>Nginx配置</h3><p>在<code>/etc/nginx/conf.d</code>目录下新建一个名字为你用做反向代理的域名的文件，当然名称随意，只是为了方便记忆。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo vim /etc/nginx/conf.d/&lt;tdom.ml&gt;</span><br></pre></td></tr></table></figure>
+<p><code>&lt;tdom.ml&gt;</code>换成自己的域名，接着输入下面代码，完成保存退出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name &lt;tdom.ml&gt;;</span><br><span class="line">    </span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass https://www.baidu.com/;</span><br><span class="line">        proxy_set_header        Host                 ;</span><br><span class="line">        proxy_set_header        X-Real-IP            <span class="variable">$remote_addr</span>;</span><br><span class="line">        proxy_set_header        X-Forwarded-For      <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        proxy_set_header        X-Remote-Port        <span class="variable">$remote_port</span>;</span><br><span class="line">        proxy_set_header        X-Forwarded-Proto    <span class="variable">$scheme</span>;</span><br><span class="line">        proxy_redirect          off;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>&lt;tdom.ml&gt;</code>还是自己的域名；</li>
+<li><code>proxy_pass</code>后即为你要反向代理的网站；</li>
+</ul>
+<h3 id="建立软链接"><a href="#建立软链接" class="headerlink" title="建立软链接"></a>建立软链接</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ln -s &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;&lt;tdom.ml&gt; &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;</span><br></pre></td></tr></table></figure>
+<p>也就是新建文件快捷方式到<code>/etc/nginx/conf.d/</code></p>
+<h3 id="Nginx重启"><a href="#Nginx重启" class="headerlink" title="Nginx重启"></a>Nginx重启</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ systemctl restart nginx</span><br><span class="line">$ systemctl status nginx</span><br></pre></td></tr></table></figure>
+<p>完成后打开浏览器输入你的域名<br><img src="https://img.voiin.com/images/2020/03/26/3594ca03ac9fa6d03.png" alt="3"></p>
 ]]></content>
+      <categories>
+        <category>Nginx</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Trojan代理+Nginx反代扶墙方式实现科学上网</title>
+    <url>/2020/01/09/trojan/</url>
+    <content><![CDATA[<h2 id="trojan"><a href="#trojan" class="headerlink" title="trojan"></a>trojan</h2><ul>
+<li>一般的科学上网采用强加密和随机混淆来欺骗GFW的过滤机制。然而，trojan采用最常见的协议HTTPS，在设计时采用了更适应国情的思路，以诱骗GFW认为它是HTTPS，从而不被识别，原理上不会被墙；</li>
+<li>trojan类似于v2 ws+tls 都是模仿常见的Web服务，但较ws+tls更轻量化，亲测比ws+tls快；</li>
+<li>本帖内容为：如何使用韦岐最新开发的trojan+nginx反代一键脚本安装trojan；</li>
+<li>过程全自动化安装，免去复杂的配置，更加适合大众；这是该项目<a href="https://github.com/voiin/trojan" target="_blank" rel="noopener">github地址</a> ,开放的源代码，无后门，担心的请无视本贴；</li>
+</ul>
+<a id="more"></a>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ol>
+<li>需要有一台国外（FQ肯定不能用国内）的linux服务器，一个顶级域名；</li>
+<li>DNS解析请使用脚本支持的阿里云，CloudFlare，Vultr;（常见的DNS)；</li>
+<li>确保是干净的系统环境，无任何服务的构建，否则安装失败不在脚本能力范围；</li>
+</ol>
+<h2 id="一键脚本"><a href="#一键脚本" class="headerlink" title="一键脚本"></a>一键脚本</h2><p><img src="https://img.voiin.com/images/2020/03/26/1.png" alt="1">)<br>)</p>
+<h3 id="CentOS"><a href="#CentOS" class="headerlink" title="CentOS"></a>CentOS</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/voiin/trojan/master/install_trojan.sh &amp;&amp; bash install_trojan.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="Debian-amp-amp-Ubuntu"><a href="#Debian-amp-amp-Ubuntu" class="headerlink" title="Debian &amp;&amp; Ubuntu"></a>Debian &amp;&amp; Ubuntu</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/voiin/trojan/master/install_trojan_de.sh &amp;&amp; bash install_trojan_de.sh</span><br></pre></td></tr></table></figure>
+<p><font color=red><strong>注意：执行脚本前先装好wget</strong></font></p>
+<p>CentOS：yum update && yum -y install wget</p>
+<p>Debian && Ubuntu：apt update && apt install -y wget</p>
+
+<h2 id="脚本声明"><a href="#脚本声明" class="headerlink" title="脚本声明"></a>脚本声明</h2><ul>
+<li>脚本为本人亲自开发，编码不易，觉得实用请多多宣传；</li>
+<li>实现trojan安装与配置并使用nginx反向代理进一步伪装；</li>
+<li>配置证书环节需要你域名DNS服务器的APIkey，目前支持AliyunDNS,CF,VultrDNS,其他DNS暂不支持；</li>
+<li>输入域名建议为顶级域名，脚本顺带申请了’www’的A记录域名的证书，请提前在DNS上解析好’www’记录；</li>
+<li>脚本申请证书并自动更新证书，并配置定时任务，部署完成过后不需做其他配置；</li>
+<li>完成后域名代理的是此github地址 如果想更改 nginx配置文件在<code>/etc/nginx/conf.d/</code> 修改<code>proxy_pass</code>后的网址即可；</li>
+<li>trojan本身占用443端口，建站想开启ssl需另开端口；</li>
+</ul>
+<h2 id="安装解析"><a href="#安装解析" class="headerlink" title="安装解析"></a>安装解析</h2><h3 id="填入APIKey和域名"><a href="#填入APIKey和域名" class="headerlink" title="填入APIKey和域名"></a>填入APIKey和域名</h3><p><img src="https://img.voiin.com/images/2020/03/26/2.png" alt="2">)<br>)<br><strong><p>留意第一个箭头的横线的信息是否与自己执行一致，一般国内的服务器会因网络延迟而连接失败；如果失败的话直接<code>ctrl+c</code>强制退出脚本 输入脚本安装命令后的<code>bash ....</code>按2卸载了重新安装；</p></strong><br><strong><p>接着选择DNS服务厂商，复制好DNS的APIkey和域名信息粘贴上去,只能输一次别手抖哈哈；</p></strong></p>
+<p><a href="https://usercenter.console.aliyun.com" target="_blank" rel="noopener">阿里云APIKey地址</a>      <a href="https://dash.cloudflare.com/efeb3f1f4b0940ed5c2bf595c05903b4/profile/api-tokens" target="_blank" rel="noopener">CloudFlare APIkey地址</a>      <a href="https://my.vultr.com/settings/#settingsapi" target="_blank" rel="noopener">Vultr APIkey地址</a></center><br><img src="https://img.voiin.com/images/2020/03/26/7.png" alt="7"><br>点击创建Accesskey即可。</p>
+<h3 id="https证书信息"><a href="#https证书信息" class="headerlink" title="https证书信息"></a>https证书信息</h3><p>因为trojan模仿的是https，所以需要ssl加密证书，脚本安装的是Let’s Encrypt的免费证书3个月并自动续期，永不过期。<br><img src="https://img.voiin.com/images/2020/03/26/3.png" alt="3"></p>
+<p><img src="https://img.voiin.com/images/2020/03/26/4.png" alt="4"><br>出现上述信息说明证书环节已经顺利完成</p>
+<h3 id="安装trojan"><a href="#安装trojan" class="headerlink" title="安装trojan"></a>安装trojan</h3><p><img src="https://img.voiin.com/images/2020/03/26/5.png" alt="5"></p>
+<p>注意检查信息是否匹配，有时网络延迟会中断安装，失败的话参照`APIkey`那里的方法</p>
+<p>这里为trojan设置密码，输两次，可重输，手残癌的福利</p>
+
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p><img src="https://img.voiin.com/images/2020/03/26/6.png" alt="6"></p>
+<p>到这一步服务器就配置完成。</p>
+<h2 id="Windows和Android客户端部署"><a href="#Windows和Android客户端部署" class="headerlink" title="Windows和Android客户端部署"></a>Windows和Android客户端部署</h2><p>几点说明，目前客户端Trojan不能使用全局代理，所以需要配合其他软件使用，比如<code>proxifier</code>等。推荐使用Trojan+Chrome插件<code>SwitchyOmega</code>实现只能Chrome翻墙的目的。这样Trojan只用监听一个端口，由Chrome插件决定当前流量是否走代理。如果你有别的用途可以单独在某个软件内部使用SOCKS5协议指定代理，地址为Trojan的地址：127.0.0.1:1080。</p>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p><strong><a href="https://github.com/trojan-gfw/trojan/releases" target="_blank" rel="noopener">trojan for windows</a></strong>，选择windows版本的压缩包，下载成功之后解压，修改目录中的<code>config.json</code>配置文件中的<code>local_port</code>、<code>remote_addr</code>和<code>password</code>即可。其中，<code>remote_addr</code>填写在服务器输入的域名，<code>local_port</code>开启本地端口，用来接收本地数据，建议修改为不常用端口，否则容易冲突 ,<code>password</code>输入安装SwitchyOmega插件刚才为trojan的密码 保存。</p>
+<h4 id="安装SwitchyOmega插件"><a href="#安装SwitchyOmega插件" class="headerlink" title="安装SwitchyOmega插件"></a>安装SwitchyOmega插件</h4><p>访问<a href="https://chrome.google.com/webstore/category/extensions?hl=zh-CN" target="_blank" rel="noopener">Chrome网上应用店</a>，搜索SwitchyOmega即可找到SwitchyOmega插件并安装之。安装完成之后重启Chrome。<br><img src="https://img.voiin.com/images/2020/03/26/8.png" alt="8"><br>情景模式中的trojan配置如图所示，代理协议为<code>SOCKS5</code> 地址为本地回环地址<code>127.0.0.1</code> 代理端口为你在trojan客户端<code>config.json</code>文件<code>local_port</code>后的端口</p>
+<h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><p><strong><a href="">trojan for android</a></strong> 选择<code>.apk</code>后缀的文件下载到移动端上，配置比较简便就不用多说了。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><ul>
+<li>写博文不易，过程有什么不懂的，请留言在下方让韦岐注意；</li>
+<li>如果本贴或多或少帮助到了你，请多多宣传或者收藏本站<a href="http://www.axrni.cn" target="_blank" rel="noopener">韦岐创世</a>，你们的浏览与反馈就是韦岐最大的动力；</li>
+</ul>
+]]></content>
+      <categories>
+        <category>源码</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Windows+Ubuntu双系统教程</title>
+    <url>/2020/03/14/wu/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Ubuntu是以桌面应用为主的Linux操作系统，相较于其他Linux系统，Ubuntu的界面应用的使用与可视化非常友好，是用做桌面客户端系统的不二之选，而且现版本自带nvidia驱动，兼容性有了很大改善，对于爱好linux的朋友来说，可以说是工作娱乐两不误，自己也是先后折腾了几次踩了一些坑才满足自己要求，在此将整个安装过程记录下来，希望对大家有所帮助。</p>
+<a id="more"></a>
+
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="硬盘分区"><a href="#硬盘分区" class="headerlink" title="硬盘分区"></a>硬盘分区</h3><p>windows下按<code>win+x</code>进入磁盘管理，选择一块容量大的盘右键压缩卷，压缩一个空间为100G的卷（足够用了）压缩完退出，不用新建简单卷。</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu1.jpg" alt="1"></p>
+<h3 id="将镜像写入U盘"><a href="#将镜像写入U盘" class="headerlink" title="将镜像写入U盘"></a>将镜像写入U盘</h3><ol>
+<li>去Ubuntu中文网<a href="https://cn.ubuntu.com/download" target="_blank" rel="noopener">https://cn.ubuntu.com/download</a> 下载最新Ubuntu镜像版本到本地；</li>
+<li>下载并安装软碟通<a href="https://www.ultraiso.com/download.html" target="_blank" rel="noopener">官网下载地址</a>，插上U盘，有重要数据的建议备份好，因为之后需要格式化；</li>
+<li>打开软碟通，进入刚才下载镜像的目录点击iso镜像文件，写入硬盘映像；</li>
+</ol>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu2.jpg" alt="2"></p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu3.jpg" alt="3"></p>
+<p><strong>注意硬盘驱动器那栏是否为自己U盘的盘符，检查无误默认写入就好了</strong></p>
+<h2 id="Bios设置"><a href="#Bios设置" class="headerlink" title="Bios设置"></a>Bios设置</h2><h3 id="判断Bios类型"><a href="#判断Bios类型" class="headerlink" title="判断Bios类型"></a><font id="a">判断Bios类型</font></h3><p>回到主界面<code>win+r</code>输入<code>msinfo32</code>回车，注意看Bios模式是否是UEFI，只要不是很老旧的本本，基本都是UEFI 如果显示传统 则是MBR启动，后面Ubuntu系统分区时要谈到</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu4.jpg" alt="4"></p>
+<h3 id="关闭Securt-Boot选项"><a href="#关闭Securt-Boot选项" class="headerlink" title="关闭Securt Boot选项"></a>关闭Securt Boot选项</h3><p>电脑关机，按下电源键按下自己品牌电脑的Bios热键一般（F2）进入Bios界面，不清楚的百度下，把<code>Securt Boot</code>选项设置为<code>disable</code>按F10保存退出，不设置系统可能安装失败。</p>
+<h2 id="U盘安装系统"><a href="#U盘安装系统" class="headerlink" title="U盘安装系统"></a>U盘安装系统</h2><p>按下U盘启动热键进入菜单项，选择U盘启动进入Ubuntu安装界面 在Install Ubuntu选项按’e’键进入编辑模式，清空<code>quite splash</code>后内容，其后输入<code>nomodeset</code> F10启动。</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu5.jpg" alt="5"></p>
+<p><strong>第三个勾 勾选会自动集成安装nvidia驱动等，建议勾选</strong></p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu6.jpg" alt="6"></p>
+<p><strong>这里选择其他选项手动进行分区</strong> </p>
+<h3 id="Ubuntu系统分区"><a href="#Ubuntu系统分区" class="headerlink" title="Ubuntu系统分区"></a>Ubuntu系统分区</h3><p>以下内容是在虚拟机内操作，可能图片信息显示有差异，但配置信息选项是按照真实物理机要求来的</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu7.jpg" alt="7"></p>
+<p><strong>选择你之前添加的那块容量100G的盘，右键添加</strong></p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu8.jpg" alt="8"></p>
+<p>大小选择200MB，分区类型为逻辑分区，空间起始位置，这就是实现你双系统的原因了。这就是启动Ubuntu的目录，里面存放着Ubuntu开机引导文件，一般只有几十兆，建议划分200兆，<strong>这里注意</strong>：</p>
+<ul>
+<li>如果是UEFI启动的挂载点选择EFI系统分区</li>
+<li>如果是传统MBR启动挂载点选择<code>/boot</code></li>
+</ul>
+<p>判断标准在前面的<font color=black><a href="#a">判断Bios类型</a></font>里，</p>
+<p><strong>剩余分区信息如下</strong></p>
+<ul>
+<li><p>swap 这个是Linux的交换区目录，主要用于电脑内存不足时，系统会调用这块分区来运行程序，以免出现异常，大小为你本机运行内存容量即可，逻辑分区，空间起始位置，挂载点选择<strong>交换空间；</strong></p>
+</li>
+<li><p>/ 这是Linux的根目录，相当于windows的C盘，但是软件程序和依赖都是默认安装在这个位置，所以这个大小我分的70G，分区类型为<strong>主分区</strong>，空间起始位置，挂载点 <code>/</code>；</p>
+</li>
+<li><p>/home 这个是Linux的家目录，相当于windos的D盘，剩余空间大小分配给它，逻辑分区，空间起始位置，挂载点<code>/home</code>；</p>
+</li>
+</ul>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu9.jpg" alt="9"></p>
+<p>这一步要选对，之前不是设置了个200MB的系统引导分区嘛 ，下面安装启动引导器的设备一定要对应上面引导分区的编号，随即点击安装。</p>
+<p>后面的步骤就是设置时区和用户名密码这些比较简单的环节，书写不易，我就不一一解释了。</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu10.jpg" alt="10"></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
   </entry>
 </search>
