@@ -1263,7 +1263,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #a6daba;
+  background: #ff7124;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1673,6 +1673,20 @@ pre .javascript .function {
   z-index: 1500;
   top: 0;
 }
+.out-img-topic {
+  display: block;
+  max-height: 500px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+img.img-topic {
+  display: block;
+  margin-left: 0.7em;
+  margin-right: 0.7em;
+  padding: 0;
+  float: right;
+  clear: right;
+}
 .post-body {
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
   overflow-wrap: break-word;
@@ -1838,7 +1852,7 @@ pre .javascript .function {
 .post-eof {
   background: #ccc;
   height: 1px;
-  margin: 80px auto 60px;
+  margin: 0 auto;
   text-align: center;
   width: 8%;
 }
