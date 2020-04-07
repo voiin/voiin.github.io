@@ -81,8 +81,9 @@
   <entry>
     <title>Windows+Ubuntu双系统教程</title>
     <url>/2020/03/14/wu/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Ubuntu是以桌面应用为主的Linux操作系统，相较于其他Linux系统，Ubuntu的界面应用的使用与可视化非常友好，是用做桌面客户端系统的不二之选，而且现版本自带nvidia驱动，兼容性有了很大改善，对于爱好linux的朋友来说，可以说是工作娱乐两不误，自己也是先后折腾了几次踩了一些坑才满足自己要求，在此将整个安装过程记录下来，希望对大家有所帮助。</p>
-<a id="more"></a>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><a id="more"></a>
+<p>Ubuntu是以桌面应用为主的Linux操作系统，相较于其他Linux系统，Ubuntu的界面应用的使用与可视化非常友好，是用做桌面客户端系统的不二之选，而且现版本自带nvidia驱动，兼容性有了很大改善，对于爱好linux的朋友来说，可以说是工作娱乐两不误，自己也是先后折腾了几次踩了一些坑才满足自己要求，在此将整个安装过程记录下来，希望对大家有所帮助。</p>
+<!--more-->
 
 <h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="硬盘分区"><a href="#硬盘分区" class="headerlink" title="硬盘分区"></a>硬盘分区</h3><p>windows下按<code>win+x</code>进入磁盘管理，选择一块容量大的盘右键压缩卷，压缩一个空间为100G的卷（足够用了）压缩完退出，不用新建简单卷。</p>
 <p><img src="https://img.voiin.com/images/2020/03/26/wu1.jpg" alt="1"></p>
