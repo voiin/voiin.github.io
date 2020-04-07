@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>宝塔5.9专业版一键源码破解</title>
+    <url>/2019/12/05/bt5.9pj/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>-宝塔面板是近几年兴起的，对于想建站的新手小白比较友好，把linux上复杂的配置命令用面板可视化进行管理,实现傻瓜式建站；<br>-本教程是基于宝塔5.9实现，内有一键脚本和命令安装可根据自己需求酌情选择 这是该项目<a href="https://github.com/voiin/bt-panel" target="_blank" rel="noopener">github地址</a>；</p>
+<a id="more"></a>
+<h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><ol>
+<li>熟悉linux操作系统基本命令，不会的直接复制代码即可；</li>
+<li>确保是干净的系统环境，没有安装任何lnmp环境之类的；</li>
+<li>系统要求 centos&gt;=7&amp;&amp;ubuntu&gt;=16.04&amp;&amp;debian&gt;=9;</li>
+</ol>
+<h2 id="一键脚本"><a href="#一键脚本" class="headerlink" title="一键脚本"></a>一键脚本</h2><p><strong>使用一键脚本</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ wget -N --no-check-certificate <span class="string">"https://raw.githubusercontent.com/voiin/bt-panel/master/crack.sh"</span> &amp;&amp; bash crack.sh</span><br></pre></td></tr></table></figure>
+<p>该脚本一键安装宝塔5.9并升至专业版随即破解，可谓一步到味！<br><img src="https://img.voiin.com/images/2020/03/17/6e82043a8134848bf.png" alt="6"></p>
+<p>放弃使用脚本请直接阅读正文部分！！！</p>
+<h3 id="脚本声明"><a href="#脚本声明" class="headerlink" title="脚本声明"></a>脚本声明</h3><ol>
+<li>本脚本为本人亲自开发，并在各大Linux操作系统上测试多次均成功；</li>
+<li>由于脚本在国外的服务器上，开始执行时可能网络不通被拒，可过几秒再复制执行一次；</li>
+</ol>
+<p>当然你喜欢折腾的话那么一下内容可能更适合你。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h3><p>打开<a href="https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=1186&extra=page%3D1%26filter%3Dtypeid%26typeid%3D6" target="_blank" rel="noopener">宝塔5.9地址</a><br><img src="https://img.voiin.com/images/2020/03/17/1ae8940bef9f026a8.png" alt="1"><br>根据自己的系统环境复制命令到shell上 敲回车执行。<br><img src="https://img.voiin.com/images/2020/03/17/27da9299353a382ff.png" alt="2"><br>执行完毕后根据下面提示复制面板地址在浏览器中打开，再复制账号，密码完成登录，宝塔面板的默认端口是8888 如果浏览器打不开，则是没有放行端口，去你服务器主机商下安全组或者防火墙开启8888端口。<br><img src="https://img.voiin.com/images/2020/03/17/30c8ac091b15e32dc.png" alt="3"><br>到这一步，基本的环境就构建好了，接着去面板设置里面把默认的账号，密码改了。下面开始步入正题<br><img src="https://img.voiin.com/images/2020/03/17/40021e2a393842f5c.png" alt="4"></p>
+<h3 id="免费版升级专业版"><a href="#免费版升级专业版" class="headerlink" title="免费版升级专业版"></a>免费版升级专业版</h3><p>注意的是如果你之前有在使用 5.9 的免费版本，通过此脚本升级专业版 复制代码回车执行。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ wget -O update.sh http://download.bt.cn/install/update_pro.sh &amp;&amp; bash update.sh pro</span><br></pre></td></tr></table></figure>
+<h3 id="破解"><a href="#破解" class="headerlink" title="破解"></a>破解</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /www/server/panel/class</span><br><span class="line">$ vim common.py</span><br></pre></td></tr></table></figure>
+<p>执行后你会看到下面情景<br><img src="https://img.voiin.com/images/2020/03/17/54fd54b9d515a7abb.png" alt="5"><br>我们需要找到 163 行代码，但是用编辑器慢慢的找到 164 行太麻烦，直接键盘输入163就会自动跳到163行代码。</p>
+<p>找到 data = panelAuth.panelAuth ().get_order_status (None); 键盘输入i进入编辑模式并且在前面放上 #进行注释。</p>
+<p>接着输入下面的代码。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ data = &#123;<span class="string">'status'</span> : True,<span class="string">'msg'</span> : &#123;<span class="string">'endtime'</span> : 32503651199&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>完成之后按esc键 输入:wq（就是shift键+;键）进入末行模式 输入wq保存退出。</p>
+<p>最后也是最重要的一步，创建一名为userInfo.json空白文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /www/server/panel/data</span><br><span class="line">$ vim userInfo.json</span><br><span class="line">按下esc 输入:wq 回车</span><br></pre></td></tr></table></figure>
+<h3 id="接着重启面板"><a href="#接着重启面板" class="headerlink" title="接着重启面板"></a>接着重启面板</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /etc/init.d/bt restart</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.voiin.com/images/2020/03/17/739784e71bef5be7f.png" alt="7"><br>到此 面板就破解完成，清除浏览器缓存重新打开你的面板。</p>
+<p>制作不易，中途有什么问题给我留言，有时间我都会看的。</p>
+]]></content>
+      <categories>
+        <category>宝塔</category>
+      </categories>
+      <tags>
+        <tag>bt</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Nginx反向代理</title>
     <url>/2019/12/16/nginxfd/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>nginx是一个作用于linux系统上的高性能web服务器，他的特点是轻量级，占有内存少，并发能力强。</p>
@@ -35,58 +76,6 @@
 ]]></content>
       <categories>
         <category>Nginx</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Windows+Ubuntu双系统教程</title>
-    <url>/2020/03/14/wu/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Ubuntu是以桌面应用为主的Linux操作系统，相较于其他Linux系统，Ubuntu的界面应用的使用与可视化非常友好，是用做桌面客户端系统的不二之选，而且现版本自带nvidia驱动，兼容性有了很大改善，对于爱好linux的朋友来说，可以说是工作娱乐两不误，自己也是先后折腾了几次踩了一些坑才满足自己要求，在此将整个安装过程记录下来，希望对大家有所帮助。</p>
-<a id="more"></a>
-
-<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="硬盘分区"><a href="#硬盘分区" class="headerlink" title="硬盘分区"></a>硬盘分区</h3><p>windows下按<code>win+x</code>进入磁盘管理，选择一块容量大的盘右键压缩卷，压缩一个空间为100G的卷（足够用了）压缩完退出，不用新建简单卷。</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu1.jpg" alt="1"></p>
-<h3 id="将镜像写入U盘"><a href="#将镜像写入U盘" class="headerlink" title="将镜像写入U盘"></a>将镜像写入U盘</h3><ol>
-<li>去Ubuntu中文网<a href="https://cn.ubuntu.com/download" target="_blank" rel="noopener">https://cn.ubuntu.com/download</a> 下载最新Ubuntu镜像版本到本地；</li>
-<li>下载并安装软碟通<a href="https://www.ultraiso.com/download.html" target="_blank" rel="noopener">官网下载地址</a>，插上U盘，有重要数据的建议备份好，因为之后需要格式化；</li>
-<li>打开软碟通，进入刚才下载镜像的目录点击iso镜像文件，写入硬盘映像；</li>
-</ol>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu2.jpg" alt="2"></p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu3.jpg" alt="3"></p>
-<p><strong>注意硬盘驱动器那栏是否为自己U盘的盘符，检查无误默认写入就好了</strong></p>
-<h2 id="Bios设置"><a href="#Bios设置" class="headerlink" title="Bios设置"></a>Bios设置</h2><h3 id="判断Bios类型"><a href="#判断Bios类型" class="headerlink" title="判断Bios类型"></a><font id="a">判断Bios类型</font></h3><p>回到主界面<code>win+r</code>输入<code>msinfo32</code>回车，注意看Bios模式是否是UEFI，只要不是很老旧的本本，基本都是UEFI 如果显示传统 则是MBR启动，后面Ubuntu系统分区时要谈到</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu4.jpg" alt="4"></p>
-<h3 id="关闭Securt-Boot选项"><a href="#关闭Securt-Boot选项" class="headerlink" title="关闭Securt Boot选项"></a>关闭Securt Boot选项</h3><p>电脑关机，按下电源键按下自己品牌电脑的Bios热键一般（F2）进入Bios界面，不清楚的百度下，把<code>Securt Boot</code>选项设置为<code>disable</code>按F10保存退出，不设置系统可能安装失败。</p>
-<h2 id="U盘安装系统"><a href="#U盘安装系统" class="headerlink" title="U盘安装系统"></a>U盘安装系统</h2><p>按下U盘启动热键进入菜单项，选择U盘启动进入Ubuntu安装界面 在Install Ubuntu选项按’e’键进入编辑模式，清空<code>quite splash</code>后内容，其后输入<code>nomodeset</code> F10启动。</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu5.jpg" alt="5"></p>
-<p><strong>第三个勾 勾选会自动集成安装nvidia驱动等，建议勾选</strong></p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu6.jpg" alt="6"></p>
-<p><strong>这里选择其他选项手动进行分区</strong> </p>
-<h3 id="Ubuntu系统分区"><a href="#Ubuntu系统分区" class="headerlink" title="Ubuntu系统分区"></a>Ubuntu系统分区</h3><p>以下内容是在虚拟机内操作，可能图片信息显示有差异，但配置信息选项是按照真实物理机要求来的</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu7.jpg" alt="7"></p>
-<p><strong>选择你之前添加的那块容量100G的盘，右键添加</strong></p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu8.jpg" alt="8"></p>
-<p>大小选择200MB，分区类型为逻辑分区，空间起始位置，这就是实现你双系统的原因了。这就是启动Ubuntu的目录，里面存放着Ubuntu开机引导文件，一般只有几十兆，建议划分200兆，<strong>这里注意</strong>：</p>
-<ul>
-<li>如果是UEFI启动的挂载点选择EFI系统分区</li>
-<li>如果是传统MBR启动挂载点选择<code>/boot</code></li>
-</ul>
-<p>判断标准在前面的<font color=black><a href="#a">判断Bios类型</a></font>里，</p>
-<p><strong>剩余分区信息如下</strong></p>
-<ul>
-<li><p>swap 这个是Linux的交换区目录，主要用于电脑内存不足时，系统会调用这块分区来运行程序，以免出现异常，大小为你本机运行内存容量即可，逻辑分区，空间起始位置，挂载点选择<strong>交换空间；</strong></p>
-</li>
-<li><p>/ 这是Linux的根目录，相当于windows的C盘，但是软件程序和依赖都是默认安装在这个位置，所以这个大小我分的70G，分区类型为<strong>主分区</strong>，空间起始位置，挂载点 <code>/</code>；</p>
-</li>
-<li><p>/home 这个是Linux的家目录，相当于windos的D盘，剩余空间大小分配给它，逻辑分区，空间起始位置，挂载点<code>/home</code>；</p>
-</li>
-</ul>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu9.jpg" alt="9"></p>
-<p>这一步要选对，之前不是设置了个200MB的系统引导分区嘛 ，下面安装启动引导器的设备一定要对应上面引导分区的编号，随即点击安装。</p>
-<p>后面的步骤就是设置时区和用户名密码这些比较简单的环节，书写不易，我就不一一解释了。</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu10.jpg" alt="10"></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
       </categories>
   </entry>
   <entry>
@@ -145,44 +134,55 @@
       </categories>
   </entry>
   <entry>
-    <title>宝塔5.9专业版一键源码破解</title>
-    <url>/2019/12/05/bt5.9pj/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>-宝塔面板是近几年兴起的，对于想建站的新手小白比较友好，把linux上复杂的配置命令用面板可视化进行管理,实现傻瓜式建站；<br>-本教程是基于宝塔5.9实现，内有一键脚本和命令安装可根据自己需求酌情选择 这是该项目<a href="https://github.com/voiin/bt-panel" target="_blank" rel="noopener">github地址</a>；</p>
+    <title>Windows+Ubuntu双系统教程</title>
+    <url>/2020/03/14/wu/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Ubuntu是以桌面应用为主的Linux操作系统，相较于其他Linux系统，Ubuntu的界面应用的使用与可视化非常友好，是用做桌面客户端系统的不二之选，而且现版本自带nvidia驱动，兼容性有了很大改善，对于爱好linux的朋友来说，可以说是工作娱乐两不误，自己也是先后折腾了几次踩了一些坑才满足自己要求，在此将整个安装过程记录下来，希望对大家有所帮助。</p>
 <a id="more"></a>
-<h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h2><ol>
-<li>熟悉linux操作系统基本命令，不会的直接复制代码即可；</li>
-<li>确保是干净的系统环境，没有安装任何lnmp环境之类的；</li>
-<li>系统要求 centos&gt;=7&amp;&amp;ubuntu&gt;=16.04&amp;&amp;debian&gt;=9;</li>
+
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="硬盘分区"><a href="#硬盘分区" class="headerlink" title="硬盘分区"></a>硬盘分区</h3><p>windows下按<code>win+x</code>进入磁盘管理，选择一块容量大的盘右键压缩卷，压缩一个空间为100G的卷（足够用了）压缩完退出，不用新建简单卷。</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu1.jpg" alt="1"></p>
+<h3 id="将镜像写入U盘"><a href="#将镜像写入U盘" class="headerlink" title="将镜像写入U盘"></a>将镜像写入U盘</h3><ol>
+<li>去Ubuntu中文网<a href="https://cn.ubuntu.com/download" target="_blank" rel="noopener">https://cn.ubuntu.com/download</a> 下载最新Ubuntu镜像版本到本地；</li>
+<li>下载并安装软碟通<a href="https://www.ultraiso.com/download.html" target="_blank" rel="noopener">官网下载地址</a>，插上U盘，有重要数据的建议备份好，因为之后需要格式化；</li>
+<li>打开软碟通，进入刚才下载镜像的目录点击iso镜像文件，写入硬盘映像；</li>
 </ol>
-<h2 id="一键脚本"><a href="#一键脚本" class="headerlink" title="一键脚本"></a>一键脚本</h2><p><strong>使用一键脚本</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ wget -N --no-check-certificate <span class="string">"https://raw.githubusercontent.com/voiin/bt-panel/master/crack.sh"</span> &amp;&amp; bash crack.sh</span><br></pre></td></tr></table></figure>
-<p>该脚本一键安装宝塔5.9并升至专业版随即破解，可谓一步到味！<br><img src="https://img.voiin.com/images/2020/03/17/6e82043a8134848bf.png" alt="6"></p>
-<p>放弃使用脚本请直接阅读正文部分！！！</p>
-<h3 id="脚本声明"><a href="#脚本声明" class="headerlink" title="脚本声明"></a>脚本声明</h3><ol>
-<li>本脚本为本人亲自开发，并在各大Linux操作系统上测试多次均成功；</li>
-<li>由于脚本在国外的服务器上，开始执行时可能网络不通被拒，可过几秒再复制执行一次；</li>
-</ol>
-<p>当然你喜欢折腾的话那么一下内容可能更适合你。</p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h3><p>打开<a href="https://www.bt.cn/bbs/forum.php?mod=viewthread&tid=1186&extra=page%3D1%26filter%3Dtypeid%26typeid%3D6" target="_blank" rel="noopener">宝塔5.9地址</a><br><img src="https://img.voiin.com/images/2020/03/17/1ae8940bef9f026a8.png" alt="1"><br>根据自己的系统环境复制命令到shell上 敲回车执行。<br><img src="https://img.voiin.com/images/2020/03/17/27da9299353a382ff.png" alt="2"><br>执行完毕后根据下面提示复制面板地址在浏览器中打开，再复制账号，密码完成登录，宝塔面板的默认端口是8888 如果浏览器打不开，则是没有放行端口，去你服务器主机商下安全组或者防火墙开启8888端口。<br><img src="https://img.voiin.com/images/2020/03/17/30c8ac091b15e32dc.png" alt="3"><br>到这一步，基本的环境就构建好了，接着去面板设置里面把默认的账号，密码改了。下面开始步入正题<br><img src="https://img.voiin.com/images/2020/03/17/40021e2a393842f5c.png" alt="4"></p>
-<h3 id="免费版升级专业版"><a href="#免费版升级专业版" class="headerlink" title="免费版升级专业版"></a>免费版升级专业版</h3><p>注意的是如果你之前有在使用 5.9 的免费版本，通过此脚本升级专业版 复制代码回车执行。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ wget -O update.sh http://download.bt.cn/install/update_pro.sh &amp;&amp; bash update.sh pro</span><br></pre></td></tr></table></figure>
-<h3 id="破解"><a href="#破解" class="headerlink" title="破解"></a>破解</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /www/server/panel/class</span><br><span class="line">$ vim common.py</span><br></pre></td></tr></table></figure>
-<p>执行后你会看到下面情景<br><img src="https://img.voiin.com/images/2020/03/17/54fd54b9d515a7abb.png" alt="5"><br>我们需要找到 163 行代码，但是用编辑器慢慢的找到 164 行太麻烦，直接键盘输入163就会自动跳到163行代码。</p>
-<p>找到 data = panelAuth.panelAuth ().get_order_status (None); 键盘输入i进入编辑模式并且在前面放上 #进行注释。</p>
-<p>接着输入下面的代码。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ data = &#123;<span class="string">'status'</span> : True,<span class="string">'msg'</span> : &#123;<span class="string">'endtime'</span> : 32503651199&#125;&#125;</span><br></pre></td></tr></table></figure>
-<p>完成之后按esc键 输入:wq（就是shift键+;键）进入末行模式 输入wq保存退出。</p>
-<p>最后也是最重要的一步，创建一名为userInfo.json空白文件。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /www/server/panel/data</span><br><span class="line">$ vim userInfo.json</span><br><span class="line">按下esc 输入:wq 回车</span><br></pre></td></tr></table></figure>
-<h3 id="接着重启面板"><a href="#接着重启面板" class="headerlink" title="接着重启面板"></a>接着重启面板</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /etc/init.d/bt restart</span><br></pre></td></tr></table></figure>
-<p><img src="https://img.voiin.com/images/2020/03/17/739784e71bef5be7f.png" alt="7"><br>到此 面板就破解完成，清除浏览器缓存重新打开你的面板。</p>
-<p>制作不易，中途有什么问题给我留言，有时间我都会看的。</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu2.jpg" alt="2"></p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu3.jpg" alt="3"></p>
+<p><strong>注意硬盘驱动器那栏是否为自己U盘的盘符，检查无误默认写入就好了</strong></p>
+<h2 id="Bios设置"><a href="#Bios设置" class="headerlink" title="Bios设置"></a>Bios设置</h2><h3 id="判断Bios类型"><a href="#判断Bios类型" class="headerlink" title="判断Bios类型"></a><font id="a">判断Bios类型</font></h3><p>回到主界面<code>win+r</code>输入<code>msinfo32</code>回车，注意看Bios模式是否是UEFI，只要不是很老旧的本本，基本都是UEFI 如果显示传统 则是MBR启动，后面Ubuntu系统分区时要谈到</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu4.jpg" alt="4"></p>
+<h3 id="关闭Securt-Boot选项"><a href="#关闭Securt-Boot选项" class="headerlink" title="关闭Securt Boot选项"></a>关闭Securt Boot选项</h3><p>电脑关机，按下电源键按下自己品牌电脑的Bios热键一般（F2）进入Bios界面，不清楚的百度下，把<code>Securt Boot</code>选项设置为<code>disable</code>按F10保存退出，不设置系统可能安装失败。</p>
+<h2 id="U盘安装系统"><a href="#U盘安装系统" class="headerlink" title="U盘安装系统"></a>U盘安装系统</h2><p>按下U盘启动热键进入菜单项，选择U盘启动进入Ubuntu安装界面 在Install Ubuntu选项按’e’键进入编辑模式，清空<code>quite splash</code>后内容，其后输入<code>nomodeset</code> F10启动。</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu5.jpg" alt="5"></p>
+<p><strong>第三个勾 勾选会自动集成安装nvidia驱动等，建议勾选</strong></p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu6.jpg" alt="6"></p>
+<p><strong>这里选择其他选项手动进行分区</strong> </p>
+<h3 id="Ubuntu系统分区"><a href="#Ubuntu系统分区" class="headerlink" title="Ubuntu系统分区"></a>Ubuntu系统分区</h3><p>以下内容是在虚拟机内操作，可能图片信息显示有差异，但配置信息选项是按照真实物理机要求来的</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu7.jpg" alt="7"></p>
+<p><strong>选择你之前添加的那块容量100G的盘，右键添加</strong></p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu8.jpg" alt="8"></p>
+<p>大小选择200MB，分区类型为逻辑分区，空间起始位置，这就是实现你双系统的原因了。这就是启动Ubuntu的目录，里面存放着Ubuntu开机引导文件，一般只有几十兆，建议划分200兆，<strong>这里注意</strong>：</p>
+<ul>
+<li>如果是UEFI启动的挂载点选择EFI系统分区</li>
+<li>如果是传统MBR启动挂载点选择<code>/boot</code></li>
+</ul>
+<p>判断标准在前面的<font color=black><a href="#a">判断Bios类型</a></font>里，</p>
+<p><strong>剩余分区信息如下</strong></p>
+<ul>
+<li><p>swap 这个是Linux的交换区目录，主要用于电脑内存不足时，系统会调用这块分区来运行程序，以免出现异常，大小为你本机运行内存容量即可，逻辑分区，空间起始位置，挂载点选择<strong>交换空间；</strong></p>
+</li>
+<li><p>/ 这是Linux的根目录，相当于windows的C盘，但是软件程序和依赖都是默认安装在这个位置，所以这个大小我分的70G，分区类型为<strong>主分区</strong>，空间起始位置，挂载点 <code>/</code>；</p>
+</li>
+<li><p>/home 这个是Linux的家目录，相当于windos的D盘，剩余空间大小分配给它，逻辑分区，空间起始位置，挂载点<code>/home</code>；</p>
+</li>
+</ul>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu9.jpg" alt="9"></p>
+<p>这一步要选对，之前不是设置了个200MB的系统引导分区嘛 ，下面安装启动引导器的设备一定要对应上面引导分区的编号，随即点击安装。</p>
+<p>后面的步骤就是设置时区和用户名密码这些比较简单的环节，书写不易，我就不一一解释了。</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu10.jpg" alt="10"></p>
 ]]></content>
       <categories>
-        <category>宝塔</category>
+        <category>Linux</category>
       </categories>
-      <tags>
-        <tag>bt</tag>
-      </tags>
   </entry>
 </search>
