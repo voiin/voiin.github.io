@@ -79,61 +79,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Trojan代理+Nginx反代扶墙方式实现科学上网</title>
-    <url>/2020/01/09/trojan/</url>
-    <content><![CDATA[<h2 id="trojan"><a href="#trojan" class="headerlink" title="trojan"></a>trojan</h2><ul>
-<li>一般的科学上网采用强加密和随机混淆来欺骗GFW的过滤机制。然而，trojan采用最常见的协议HTTPS，在设计时采用了更适应国情的思路，以诱骗GFW认为它是HTTPS，从而不被识别，原理上不会被墙；</li>
-<li>trojan类似于v2 ws+tls 都是模仿常见的Web服务，但较ws+tls更轻量化，亲测比ws+tls快；</li>
-<li>本帖内容为：如何使用韦岐最新开发的trojan+nginx反代一键脚本安装trojan；</li>
-<li>过程全自动化安装，免去复杂的配置，更加适合大众；这是该项目<a href="https://github.com/voiin/trojan" target="_blank" rel="noopener">github地址</a> ,开放的源代码，无后门，担心的请无视本贴；</li>
-</ul>
-<a id="more"></a>
-<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ol>
-<li>需要有一台国外（FQ肯定不能用国内）的linux服务器，一个顶级域名；</li>
-<li>DNS解析请使用脚本支持的阿里云，CloudFlare，Vultr;（常见的DNS)；</li>
-<li>确保是干净的系统环境，无任何服务的构建，否则安装失败不在脚本能力范围；</li>
-</ol>
-<h2 id="一键脚本"><a href="#一键脚本" class="headerlink" title="一键脚本"></a>一键脚本</h2><p><img src="https://img.voiin.com/images/2020/03/26/1.png" alt="1">)<br>)</p>
-<h3 id="CentOS"><a href="#CentOS" class="headerlink" title="CentOS"></a>CentOS</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/voiin/trojan/master/install_trojan.sh &amp;&amp; bash install_trojan.sh</span><br></pre></td></tr></table></figure>
-
-<h3 id="Debian-amp-amp-Ubuntu"><a href="#Debian-amp-amp-Ubuntu" class="headerlink" title="Debian &amp;&amp; Ubuntu"></a>Debian &amp;&amp; Ubuntu</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/voiin/trojan/master/install_trojan_de.sh &amp;&amp; bash install_trojan_de.sh</span><br></pre></td></tr></table></figure>
-<p><font color=red><strong>注意：执行脚本前先装好wget</strong></font></p>
-<p>CentOS：yum update && yum -y install wget</p>
-<p>Debian && Ubuntu：apt update && apt install -y wget</p>
-
-<h2 id="脚本声明"><a href="#脚本声明" class="headerlink" title="脚本声明"></a>脚本声明</h2><ul>
-<li>脚本为本人亲自开发，编码不易，觉得实用请多多宣传；</li>
-<li>实现trojan安装与配置并使用nginx反向代理进一步伪装；</li>
-<li>配置证书环节需要你域名DNS服务器的APIkey，目前支持AliyunDNS,CF,VultrDNS,其他DNS暂不支持；</li>
-<li>输入域名建议为顶级域名，脚本顺带申请了’www’的A记录域名的证书，请提前在DNS上解析好’www’记录；</li>
-<li>脚本申请证书并自动更新证书，并配置定时任务，部署完成过后不需做其他配置；</li>
-<li>完成后域名代理的是此github地址 如果想更改 nginx配置文件在<code>/etc/nginx/conf.d/</code> 修改<code>proxy_pass</code>后的网址即可；</li>
-<li>trojan本身占用443端口，建站想开启ssl需另开端口；</li>
-</ul>
-<h2 id="安装解析"><a href="#安装解析" class="headerlink" title="安装解析"></a>安装解析</h2><h3 id="填入APIKey和域名"><a href="#填入APIKey和域名" class="headerlink" title="填入APIKey和域名"></a>填入APIKey和域名</h3><p><img src="https://img.voiin.com/images/2020/03/26/2.png" alt="2">)<br>)<br><strong><p>留意第一个箭头的横线的信息是否与自己执行一致，一般国内的服务器会因网络延迟而连接失败；如果失败的话直接<code>ctrl+c</code>强制退出脚本 输入脚本安装命令后的<code>bash ....</code>按2卸载了重新安装；</p></strong><br><strong><p>接着选择DNS服务厂商，复制好DNS的APIkey和域名信息粘贴上去,只能输一次别手抖哈哈；</p></strong></p>
-<p><a href="https://usercenter.console.aliyun.com" target="_blank" rel="noopener">阿里云APIKey地址</a>      <a href="https://dash.cloudflare.com/efeb3f1f4b0940ed5c2bf595c05903b4/profile/api-tokens" target="_blank" rel="noopener">CloudFlare APIkey地址</a>      <a href="https://my.vultr.com/settings/#settingsapi" target="_blank" rel="noopener">Vultr APIkey地址</a></center><br><img src="https://img.voiin.com/images/2020/03/26/7.png" alt="7"><br>点击创建Accesskey即可。</p>
-<h3 id="https证书信息"><a href="#https证书信息" class="headerlink" title="https证书信息"></a>https证书信息</h3><p>因为trojan模仿的是https，所以需要ssl加密证书，脚本安装的是Let’s Encrypt的免费证书3个月并自动续期，永不过期。<br><img src="https://img.voiin.com/images/2020/03/26/3.png" alt="3"></p>
-<p><img src="https://img.voiin.com/images/2020/03/26/4.png" alt="4"><br>出现上述信息说明证书环节已经顺利完成</p>
-<h3 id="安装trojan"><a href="#安装trojan" class="headerlink" title="安装trojan"></a>安装trojan</h3><p><img src="https://img.voiin.com/images/2020/03/26/5.png" alt="5"></p>
-<p>注意检查信息是否匹配，有时网络延迟会中断安装，失败的话参照`APIkey`那里的方法</p>
-<p>这里为trojan设置密码，输两次，可重输，手残癌的福利</p>
-
-<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p><img src="https://img.voiin.com/images/2020/03/26/6.png" alt="6"></p>
-<p>到这一步服务器就配置完成。</p>
-<h2 id="Windows和Android客户端部署"><a href="#Windows和Android客户端部署" class="headerlink" title="Windows和Android客户端部署"></a>Windows和Android客户端部署</h2><p>几点说明，目前客户端Trojan不能使用全局代理，所以需要配合其他软件使用，比如<code>proxifier</code>等。推荐使用Trojan+Chrome插件<code>SwitchyOmega</code>实现只能Chrome翻墙的目的。这样Trojan只用监听一个端口，由Chrome插件决定当前流量是否走代理。如果你有别的用途可以单独在某个软件内部使用SOCKS5协议指定代理，地址为Trojan的地址：127.0.0.1:1080。</p>
-<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p><strong><a href="https://github.com/trojan-gfw/trojan/releases" target="_blank" rel="noopener">trojan for windows</a></strong>，选择windows版本的压缩包，下载成功之后解压，修改目录中的<code>config.json</code>配置文件中的<code>local_port</code>、<code>remote_addr</code>和<code>password</code>即可。其中，<code>remote_addr</code>填写在服务器输入的域名，<code>local_port</code>开启本地端口，用来接收本地数据，建议修改为不常用端口，否则容易冲突 ,<code>password</code>输入安装SwitchyOmega插件刚才为trojan的密码 保存。</p>
-<h4 id="安装SwitchyOmega插件"><a href="#安装SwitchyOmega插件" class="headerlink" title="安装SwitchyOmega插件"></a>安装SwitchyOmega插件</h4><p>访问<a href="https://chrome.google.com/webstore/category/extensions?hl=zh-CN" target="_blank" rel="noopener">Chrome网上应用店</a>，搜索SwitchyOmega即可找到SwitchyOmega插件并安装之。安装完成之后重启Chrome。<br><img src="https://img.voiin.com/images/2020/03/26/8.png" alt="8"><br>情景模式中的trojan配置如图所示，代理协议为<code>SOCKS5</code> 地址为本地回环地址<code>127.0.0.1</code> 代理端口为你在trojan客户端<code>config.json</code>文件<code>local_port</code>后的端口</p>
-<h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><p><strong><a href="">trojan for android</a></strong> 选择<code>.apk</code>后缀的文件下载到移动端上，配置比较简便就不用多说了。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><ul>
-<li>写博文不易，过程有什么不懂的，请留言在下方让韦岐注意；</li>
-<li>如果本贴或多或少帮助到了你，请多多宣传或者收藏本站<a href="http://www.axrni.cn" target="_blank" rel="noopener">韦岐创世</a>，你们的浏览与反馈就是韦岐最大的动力；</li>
-</ul>
-]]></content>
-      <categories>
-        <category>源码</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Windows+Ubuntu双系统教程</title>
     <url>/2020/03/14/wu/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Ubuntu是以桌面应用为主的Linux操作系统，相较于其他Linux系统，Ubuntu的界面应用的使用与可视化非常友好，是用做桌面客户端系统的不二之选，而且现版本自带nvidia驱动，兼容性有了很大改善，对于爱好linux的朋友来说，可以说是工作娱乐两不误，自己也是先后折腾了几次踩了一些坑才满足自己要求，在此将整个安装过程记录下来，希望对大家有所帮助。</p>
