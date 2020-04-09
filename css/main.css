@@ -1263,7 +1263,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #12b5bd;
+  background: #58f566;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1622,9 +1622,6 @@ pre .javascript .function {
   }
   .post-body .tabs .tab-content .tab-pane {
     padding: 10px 10px 0 10px !important;
-  }
-  .post-eof {
-    margin: 40px auto 20px !important;
   }
   .pagination {
     margin-top: 40px;
