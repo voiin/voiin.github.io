@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>随感笔记</title>
-    <url>/2020/04/12/note/</url>
-    <content><![CDATA[<p>许多事情呢往往不是自己能改变的<a id="more"></a>，与其想着怎么抗拒，不如怎么舒服怎么来，有些东西既然未曾拥有，又何谈失去。陪你走过孤独的的东西，终将注入你的灵魂，那些杀不死你的，也终将使你更为强大。不管事态炎凉待你如何，要保持心底那份善良与纯真。我一直相信人以群分，你是什么样的人就会遇见什么样的人，绝非偶然，他们的出现一定会教会你什么。所以惜缘随缘莫攀缘。有些人有些事渐行渐远，也使我更加清楚自己的取向，道不同，不相为谋，朋友不多，知我者足矣。不奢求人生大富大贵，但求失势你依旧未曾离去。得其所爱，倾尽平生以慷慨。</p>
-
-<p><img src="https://img.voiin.com/images/2020/04/12/td28be4996c156872c.jpg" alt="1"></p>
-]]></content>
-      <categories>
-        <category>日志分享</category>
-      </categories>
-      <tags>
-        <tag>尽力过后，我选随缘</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>悲伤故事影评</title>
     <url>/2019/06/24/bs/</url>
     <content><![CDATA[<p>种草了一部电影 比悲伤更悲伤的故事</p>
@@ -68,6 +54,20 @@
       <categories>
         <category>Nginx</category>
       </categories>
+  </entry>
+  <entry>
+    <title>随感笔记</title>
+    <url>/2020/04/12/note/</url>
+    <content><![CDATA[<p>许多事情呢往往不是自己能改变的<a id="more"></a>，与其想着怎么抗拒，不如怎么舒服怎么来，有些东西既然未曾拥有，又何谈失去。陪你走过孤独的的东西，终将注入你的灵魂，那些杀不死你的，也终将使你更为强大。不管事态炎凉待你如何，要保持心底那份善良与纯真。我一直相信人以群分，你是什么样的人就会遇见什么样的人，绝非偶然，他们的出现一定会教会你什么。所以惜缘随缘莫攀缘。有些人有些事渐行渐远，也使我更加清楚自己的取向，道不同，不相为谋，朋友不多，知我者足矣。不奢求人生大富大贵，但求失势你依旧未曾离去。得其所爱，倾尽平生以慷慨。</p>
+
+<p><img src="https://img.voiin.com/images/2020/04/12/td28be4996c156872c.jpg" alt="1"></p>
+]]></content>
+      <categories>
+        <category>日志分享</category>
+      </categories>
+      <tags>
+        <tag>尽力过后，我选随缘</tag>
+      </tags>
   </entry>
   <entry>
     <title>Trojan代理+Nginx反代扶墙方式实现科学上网</title>
