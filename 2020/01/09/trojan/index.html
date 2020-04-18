@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.axrni.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"axrni.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="trojan 一般的科学上网采用强加密和随机混淆来欺骗GFW的过滤机制。然而，trojan采用最常见的协议HTTPS，在设计时采用了更适应国情的思路，以诱骗GFW认为它是HTTPS，从而不被识别，原理上不会被墙； trojan类似于v2 ws+tls 都是模仿常见的Web服务，但较ws+tls更轻量化，亲测比ws+tls快； 本帖内容为：如何使用韦岐最新开发的trojan+nginx反代一键脚本安">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Trojan代理+Nginx反代扶墙方式实现科学上网">
-<meta property="og:url" content="https://www.axrni.cn/2020/01/09/trojan/index.html">
+<meta property="og:url" content="https://axrni.cn/2020/01/09/trojan/index.html">
 <meta property="og:site_name" content="一度清欢">
 <meta property="og:description" content="trojan 一般的科学上网采用强加密和随机混淆来欺骗GFW的过滤机制。然而，trojan采用最常见的协议HTTPS，在设计时采用了更适应国情的思路，以诱骗GFW认为它是HTTPS，从而不被识别，原理上不会被墙； trojan类似于v2 ws+tls 都是模仿常见的Web服务，但较ws+tls更轻量化，亲测比ws+tls快； 本帖内容为：如何使用韦岐最新开发的trojan+nginx反代一键脚本安">
 <meta property="og:locale" content="zh_CN">
@@ -41,7 +41,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img.voiin.com/images/2020/03/26/1.png">
 
-<link rel="canonical" href="https://www.axrni.cn/2020/01/09/trojan/">
+<link rel="canonical" href="https://axrni.cn/2020/01/09/trojan/">
 
 
 <script id="page-configurations">
@@ -209,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.axrni.cn/2020/01/09/trojan/">
+    <link itemprop="mainEntityOfPage" href="https://axrni.cn/2020/01/09/trojan/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://img.voiin.com/images/2020/04/05/welin.jpg">
@@ -328,7 +328,7 @@
 <h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><p><strong><a href="">trojan for android</a></strong> 选择<code>.apk</code>后缀的文件下载到移动端上，配置比较简便就不用多说了。</p>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><ul>
 <li>写博文不易，过程有什么不懂的，请留言在下方让韦岐注意；</li>
-<li>如果本贴或多或少帮助到了你，请多多宣传或者收藏本站<a href="http://www.axrni.cn">韦岐创世</a>，你们的浏览与反馈就是韦岐最大的动力；</li>
+<li>如果本贴或多或少帮助到了你，请多多宣传或者收藏本站<a href="http://www.axrni.cn" target="_blank" rel="noopener">韦岐创世</a>，你们的浏览与反馈就是韦岐最大的动力；</li>
 </ul>
 
     </div>
@@ -345,7 +345,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://www.axrni.cn/2020/01/09/trojan/" title="Trojan代理+Nginx反代扶墙方式实现科学上网">https://www.axrni.cn/2020/01/09/trojan/</a>
+    <a href="https://axrni.cn/2020/01/09/trojan/" title="Trojan代理+Nginx反代扶墙方式实现科学上网">https://axrni.cn/2020/01/09/trojan/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
