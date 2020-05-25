@@ -70,58 +70,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Windows+Ubuntu双系统教程</title>
-    <url>/2020/03/14/wu/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Ubuntu是以桌面应用为主的Linux操作系统，相较于其他Linux系统，Ubuntu的界面应用的使用与可视化非常友好，是用做桌面客户端系统的不二之选，而且现版本自带nvidia驱动，兼容性有了很大改善，对于爱好linux的朋友来说，可以说是工作娱乐两不误，自己也是先后折腾了几次踩了一些坑才满足自己要求，在此将整个安装过程记录下来，希望对大家有所帮助。</p>
-<a id="more"></a>
-
-<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="硬盘分区"><a href="#硬盘分区" class="headerlink" title="硬盘分区"></a>硬盘分区</h3><p>windows下按<code>win+x</code>进入磁盘管理，选择一块容量大的盘右键压缩卷，压缩一个空间为100G的卷（足够用了）压缩完退出，不用新建简单卷。</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu1.jpg" alt="1"></p>
-<h3 id="将镜像写入U盘"><a href="#将镜像写入U盘" class="headerlink" title="将镜像写入U盘"></a>将镜像写入U盘</h3><ol>
-<li>去Ubuntu中文网<a href="https://cn.ubuntu.com/download" target="_blank" rel="noopener">https://cn.ubuntu.com/download</a> 下载最新Ubuntu镜像版本到本地；</li>
-<li>下载并安装软碟通<a href="https://www.ultraiso.com/download.html" target="_blank" rel="noopener">官网下载地址</a>，插上U盘，有重要数据的建议备份好，因为之后需要格式化；</li>
-<li>打开软碟通，进入刚才下载镜像的目录点击iso镜像文件，写入硬盘映像；</li>
-</ol>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu2.jpg" alt="2"></p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu3.jpg" alt="3"></p>
-<p><strong>注意硬盘驱动器那栏是否为自己U盘的盘符，检查无误默认写入就好了</strong></p>
-<h2 id="Bios设置"><a href="#Bios设置" class="headerlink" title="Bios设置"></a>Bios设置</h2><h3 id="判断Bios类型"><a href="#判断Bios类型" class="headerlink" title="判断Bios类型"></a><font id="a">判断Bios类型</font></h3><p>回到主界面<code>win+r</code>输入<code>msinfo32</code>回车，注意看Bios模式是否是UEFI，只要不是很老旧的本本，基本都是UEFI 如果显示传统 则是MBR启动，后面Ubuntu系统分区时要谈到</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu4.jpg" alt="4"></p>
-<h3 id="关闭Securt-Boot选项"><a href="#关闭Securt-Boot选项" class="headerlink" title="关闭Securt Boot选项"></a>关闭Securt Boot选项</h3><p>电脑关机，按下电源键按下自己品牌电脑的Bios热键一般（F2）进入Bios界面，不清楚的百度下，把<code>Securt Boot</code>选项设置为<code>disable</code>按F10保存退出，不设置系统可能安装失败。</p>
-<h2 id="U盘安装系统"><a href="#U盘安装系统" class="headerlink" title="U盘安装系统"></a>U盘安装系统</h2><p>按下U盘启动热键进入菜单项，选择U盘启动进入Ubuntu安装界面 在Install Ubuntu选项按’e’键进入编辑模式，清空<code>quite splash</code>后内容，其后输入<code>nomodeset</code> F10启动。</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu5.jpg" alt="5"></p>
-<p><strong>第三个勾 勾选会自动集成安装nvidia驱动等，建议勾选</strong></p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu6.jpg" alt="6"></p>
-<p><strong>这里选择其他选项手动进行分区</strong> </p>
-<h3 id="Ubuntu系统分区"><a href="#Ubuntu系统分区" class="headerlink" title="Ubuntu系统分区"></a>Ubuntu系统分区</h3><p>以下内容是在虚拟机内操作，可能图片信息显示有差异，但配置信息选项是按照真实物理机要求来的</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu7.jpg" alt="7"></p>
-<p><strong>选择你之前添加的那块容量100G的盘，右键添加</strong></p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu8.jpg" alt="8"></p>
-<p>大小选择200MB，分区类型为逻辑分区，空间起始位置，这就是实现你双系统的原因了。这就是启动Ubuntu的目录，里面存放着Ubuntu开机引导文件，一般只有几十兆，建议划分200兆，<strong>这里注意</strong>：</p>
-<ul>
-<li>如果是UEFI启动的挂载点选择EFI系统分区</li>
-<li>如果是传统MBR启动挂载点选择<code>/boot</code></li>
-</ul>
-<p>判断标准在前面的<font color=black><a href="#a">判断Bios类型</a></font>里，</p>
-<p><strong>剩余分区信息如下</strong></p>
-<ul>
-<li><p>swap 这个是Linux的交换区目录，主要用于电脑内存不足时，系统会调用这块分区来运行程序，以免出现异常，大小为你本机运行内存容量即可，逻辑分区，空间起始位置，挂载点选择<strong>交换空间；</strong></p>
-</li>
-<li><p>/ 这是Linux的根目录，相当于windows的C盘，但是软件程序和依赖都是默认安装在这个位置，所以这个大小我分的70G，分区类型为<strong>主分区</strong>，空间起始位置，挂载点 <code>/</code>；</p>
-</li>
-<li><p>/home 这个是Linux的家目录，相当于windos的D盘，剩余空间大小分配给它，逻辑分区，空间起始位置，挂载点<code>/home</code>；</p>
-</li>
-</ul>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu9.jpg" alt="9"></p>
-<p>这一步要选对，之前不是设置了个200MB的系统引导分区嘛 ，下面安装启动引导器的设备一定要对应上面引导分区的编号，随即点击安装。</p>
-<p>后面的步骤就是设置时区和用户名密码这些比较简单的环节，书写不易，我就不一一解释了。</p>
-<p><img src="https://img.voiin.com/images/2020/03/26/wu10.jpg" alt="10"></p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Trojan代理+Nginx反代扶墙方式实现科学上网</title>
     <url>/2020/01/09/trojan/</url>
     <content><![CDATA[<h2 id="trojan"><a href="#trojan" class="headerlink" title="trojan"></a>trojan</h2><ul>
@@ -174,6 +122,58 @@
 ]]></content>
       <categories>
         <category>源码</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Windows+Ubuntu双系统教程</title>
+    <url>/2020/03/14/wu/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Ubuntu是以桌面应用为主的Linux操作系统，相较于其他Linux系统，Ubuntu的界面应用的使用与可视化非常友好，是用做桌面客户端系统的不二之选，而且现版本自带nvidia驱动，兼容性有了很大改善，对于爱好linux的朋友来说，可以说是工作娱乐两不误，自己也是先后折腾了几次踩了一些坑才满足自己要求，在此将整个安装过程记录下来，希望对大家有所帮助。</p>
+<a id="more"></a>
+
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="硬盘分区"><a href="#硬盘分区" class="headerlink" title="硬盘分区"></a>硬盘分区</h3><p>windows下按<code>win+x</code>进入磁盘管理，选择一块容量大的盘右键压缩卷，压缩一个空间为100G的卷（足够用了）压缩完退出，不用新建简单卷。</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu1.jpg" alt="1"></p>
+<h3 id="将镜像写入U盘"><a href="#将镜像写入U盘" class="headerlink" title="将镜像写入U盘"></a>将镜像写入U盘</h3><ol>
+<li>去Ubuntu中文网<a href="https://cn.ubuntu.com/download" target="_blank" rel="noopener">https://cn.ubuntu.com/download</a> 下载最新Ubuntu镜像版本到本地；</li>
+<li>下载并安装软碟通<a href="https://www.ultraiso.com/download.html" target="_blank" rel="noopener">官网下载地址</a>，插上U盘，有重要数据的建议备份好，因为之后需要格式化；</li>
+<li>打开软碟通，进入刚才下载镜像的目录点击iso镜像文件，写入硬盘映像；</li>
+</ol>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu2.jpg" alt="2"></p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu3.jpg" alt="3"></p>
+<p><strong>注意硬盘驱动器那栏是否为自己U盘的盘符，检查无误默认写入就好了</strong></p>
+<h2 id="Bios设置"><a href="#Bios设置" class="headerlink" title="Bios设置"></a>Bios设置</h2><h3 id="判断Bios类型"><a href="#判断Bios类型" class="headerlink" title="判断Bios类型"></a><font id="a">判断Bios类型</font></h3><p>回到主界面<code>win+r</code>输入<code>msinfo32</code>回车，注意看Bios模式是否是UEFI，只要不是很老旧的本本，基本都是UEFI 如果显示传统 则是MBR启动，后面Ubuntu系统分区时要谈到</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu4.jpg" alt="4"></p>
+<h3 id="关闭Securt-Boot选项"><a href="#关闭Securt-Boot选项" class="headerlink" title="关闭Securt Boot选项"></a>关闭Securt Boot选项</h3><p>电脑关机，按下电源键按下自己品牌电脑的Bios热键一般（F2）进入Bios界面，不清楚的百度下，把<code>Securt Boot</code>选项设置为<code>disable</code>按F10保存退出，不设置系统可能安装失败。</p>
+<h2 id="U盘安装系统"><a href="#U盘安装系统" class="headerlink" title="U盘安装系统"></a>U盘安装系统</h2><p>按下U盘启动热键进入菜单项，选择U盘启动进入Ubuntu安装界面 在Install Ubuntu选项按’e’键进入编辑模式，清空<code>quite splash</code>后内容，其后输入<code>nomodeset</code> F10启动。</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu5.jpg" alt="5"></p>
+<p><strong>第三个勾 勾选会自动集成安装nvidia驱动等，建议勾选</strong></p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu6.jpg" alt="6"></p>
+<p><strong>这里选择其他选项手动进行分区</strong> </p>
+<h3 id="Ubuntu系统分区"><a href="#Ubuntu系统分区" class="headerlink" title="Ubuntu系统分区"></a>Ubuntu系统分区</h3><p>以下内容是在虚拟机内操作，可能图片信息显示有差异，但配置信息选项是按照真实物理机要求来的</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu7.jpg" alt="7"></p>
+<p><strong>选择你之前添加的那块容量100G的盘，右键添加</strong></p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu8.jpg" alt="8"></p>
+<p>大小选择200MB，分区类型为逻辑分区，空间起始位置，这就是实现你双系统的原因了。这就是启动Ubuntu的目录，里面存放着Ubuntu开机引导文件，一般只有几十兆，建议划分200兆，<strong>这里注意</strong>：</p>
+<ul>
+<li>如果是UEFI启动的挂载点选择EFI系统分区</li>
+<li>如果是传统MBR启动挂载点选择<code>/boot</code></li>
+</ul>
+<p>判断标准在前面的<font color=black><a href="#a">判断Bios类型</a></font>里，</p>
+<p><strong>剩余分区信息如下</strong></p>
+<ul>
+<li><p>swap 这个是Linux的交换区目录，主要用于电脑内存不足时，系统会调用这块分区来运行程序，以免出现异常，大小为你本机运行内存容量即可，逻辑分区，空间起始位置，挂载点选择<strong>交换空间；</strong></p>
+</li>
+<li><p>/ 这是Linux的根目录，相当于windows的C盘，但是软件程序和依赖都是默认安装在这个位置，所以这个大小我分的70G，分区类型为<strong>主分区</strong>，空间起始位置，挂载点 <code>/</code>；</p>
+</li>
+<li><p>/home 这个是Linux的家目录，相当于windos的D盘，剩余空间大小分配给它，逻辑分区，空间起始位置，挂载点<code>/home</code>；</p>
+</li>
+</ul>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu9.jpg" alt="9"></p>
+<p>这一步要选对，之前不是设置了个200MB的系统引导分区嘛 ，下面安装启动引导器的设备一定要对应上面引导分区的编号，随即点击安装。</p>
+<p>后面的步骤就是设置时区和用户名密码这些比较简单的环节，书写不易，我就不一一解释了。</p>
+<p><img src="https://img.voiin.com/images/2020/03/26/wu10.jpg" alt="10"></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
       </categories>
   </entry>
 </search>
