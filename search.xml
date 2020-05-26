@@ -4,6 +4,7 @@
     <title>一个随机漫图的API接口</title>
     <url>/2020/05/25/api/</url>
     <content><![CDATA[<p>之前就发现这个小项目，一直调用的别人的接口停用了难免或多或少显得被动，所以自己做了个api随机图片接口，用作每日桌面壁纸和网页背景图都欧克</p>
+<a id="more"></a>
 <p>主页 <a href="https://api.voiin.com" target="_blank" rel="noopener">https://api.voiin.com</a>（搭建中……）</p>
 <p>调用地址：<a href="https://api.voiin.com/wallpaper" target="_blank" rel="noopener">https://api.voiin.com/wallpaper</a></p>
 <p><strong>注意：</strong>不是<a href="https://api.voiin.com/wallpaper/" target="_blank" rel="noopener">https://api.voiin.com/wallpaper/</a></p>
